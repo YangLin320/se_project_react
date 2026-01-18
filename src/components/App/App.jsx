@@ -4,13 +4,13 @@ import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { useState, useEffect } from "react";
-import { weather, filterWeatherData } from "../../util/weatherapi.js";
-import { coordinates, apiKey } from "../../util/constants.js";
+import { weather, filterWeatherData } from "../../utils/weatherapi.js";
+import { coordinates, apiKey } from "../../utils/constants.js";
 
 function App() {
    const [weatherData, setWeatherData] = useState({
       type: "",
-      temp: { F: 999},
+      temp: { F: 999 },
       city: "",
    });
    const [activeModal, setActiveModal] = useState("");
@@ -40,7 +40,10 @@ function App() {
    return (
       <div className="page">
          <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData = {weatherData}></Header>
+            <Header
+               handleAddClick={handleAddClick}
+               weatherData={weatherData}
+            ></Header>
             <Main
                weatherData={weatherData}
                handleCardClick={handleCardClick}
