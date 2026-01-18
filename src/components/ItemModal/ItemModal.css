@@ -1,0 +1,46 @@
+.modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   background-color: #0000004d;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   visibility: hidden;
+}
+
+.modal__opened{
+   visibility: visible;
+}
+
+.modal__close {
+   background-image: url("../../assets/modalClose.svg");
+   position: absolute;
+   top: 20px;
+   right: 28px;
+   border: none;
+   width: 20px;
+   height: 20px;
+   background-size: cover;
+   background-color: transparent;
+}
+
+.modal__close:hover {
+   cursor: pointer;
+}
+
+.modal__content_type_preview{
+    height: 610px;
+    width: 498px;
+    padding:0;
+    overflow:hidden;
+}
+
+.modal__footer{
+    margin-left:32px;
+    font-family: Cabinet Grotesk;
+    font-size: 20px;
+    line-height: 24px;
+}
