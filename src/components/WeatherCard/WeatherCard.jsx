@@ -13,7 +13,7 @@ function WeatherCard({ weatherData }) {
          <p className="weather-card__temp">{weatherData.temp.F}° F</p>
          <img
             src={weatherOptions[0].url}
-            alt="Visual of Weather"
+            alt = {`${weatherData.condition} icon`}
             className="weather-card__img"
          />
       </section>

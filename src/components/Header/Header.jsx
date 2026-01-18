@@ -1,7 +1,6 @@
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
 import avatar from "../../assets/avatar.svg";
-import { weather } from "../../utils/weatherapi";
 
 const currentDate = new Date().toLocaleString("default", {
    month: "long",

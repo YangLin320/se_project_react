@@ -1,6 +1,10 @@
-# React + Vite
+WTWR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web application that can read weather data from a Weather API and then recommend suitable clothing to the user based on that data.
+
+Developed by Yangtao Lin
+
+Project Link: https://github.com/YangLin320/se_project_react
 
 Currently, two official plugins are available:
 
