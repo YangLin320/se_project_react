@@ -3,15 +3,18 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import Footer from "../Footer/Footer.jsx";
 import { useState, useEffect } from "react";
 import { weather, filterWeatherData } from "../../utils/weatherapi.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 
 function App() {
    const [weatherData, setWeatherData] = useState({
-      type: "",
-      temp: { F: 999 },
       city: "",
+      temp: { F: 999 },
+      type: "",
+      condition: "",
+      isDay: true,
    });
    const [activeModal, setActiveModal] = useState("");
    const [selectedCard, setSelectedCard] = useState({});
@@ -48,6 +51,7 @@ function App() {
                weatherData={weatherData}
                handleCardClick={handleCardClick}
             ></Main>
+            <Footer></Footer>
          </div>
          <ModalWithForm
             modalTitle={"New Garment"}

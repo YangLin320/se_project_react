@@ -1,4 +1,3 @@
-import day_sunny from "../../assets/weather/day_sunny.svg";
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
 
@@ -13,7 +12,7 @@ function WeatherCard({ weatherData }) {
       <section className="weather-card">
          <p className="weather-card__temp">{weatherData.temp.F}° F</p>
          <img
-            src={weatherOption[0].url}
+            src={weatherOptions[0].url}
             alt="Visual of Weather"
             className="weather-card__img"
          />
