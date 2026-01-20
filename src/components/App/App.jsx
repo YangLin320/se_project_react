@@ -19,6 +19,7 @@ function App() {
    });
    const [activeModal, setActiveModal] = useState("");
    const [selectedCard, setSelectedCard] = useState({});
+   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
    const handleAddClick = () => {
       setActiveModal("add-garment");
@@ -51,7 +52,7 @@ function App() {
             <Main
                weatherData={weatherData}
                handleCardClick={handleCardClick}
-               defaultClothingItems = {defaultClothingItems}
+               clothingItems={clothingItems}
             ></Main>
             <Footer></Footer>
          </div>
@@ -61,6 +62,7 @@ function App() {
             activeModal={activeModal}
             closeModal={closeModal}
             name={"newCard"}
+            isOpen={activeModal === "add-garment"}
          >
             <div className="modal__field">
                <label htmlFor="name" className="modal__label">
