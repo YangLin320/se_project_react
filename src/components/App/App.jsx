@@ -1,14 +1,13 @@
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
-import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import { useState, useEffect } from "react";
 import { getWeather, filterWeatherData } from "../../utils/weatherapi.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
-import AddItemModal from "../../AddItemModal/AddItemModal.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { deleteClothing, getClothes, postClothing } from "../../utils/api.js";

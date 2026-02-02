@@ -12,7 +12,9 @@ const currentDate = new Date().toLocaleString("default", {
 function Header({ handleAddClick, weatherData }) {
    return (
       <header className="header">
-         <img src={logo} alt="Image of Logo" className="header__logo" />
+         <NavLink NavLink to="/" className="header__navlink">
+            <img src={logo} alt="Image of Logo" className="header__logo" />
+         </NavLink>
          <p className="header__setting">
             {" "}
             {currentDate}, {weatherData.city}{" "}
@@ -21,16 +23,16 @@ function Header({ handleAddClick, weatherData }) {
          <button onClick={handleAddClick} className="header__add-clothes-btn">
             + Add Clothes
          </button>
-         <NavLink to="/Profile" className="header__navlink">
-            <div className="header__user-container">
-               <p className="header__username"> Terrence Tegegne </p>
+         <div className="header__user-container">
+            <p className="header__username"> Terrence Tegegne </p>
+            <NavLink to="/profile" className="header__navlink">
                <img
                   src={avatar}
                   alt="Image of User Avatar"
                   className="header__avatar"
                />
-            </div>
-         </NavLink>
+            </NavLink>
+         </div>
       </header>
    );
 }

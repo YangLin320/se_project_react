@@ -1,7 +1,7 @@
 import "./ClothesSection.css";
-import ItemCard from "../components/ItemCard/ItemCard";
+import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({clothingItems, handleCardClick}) {
+function ClothesSection({ clothingItems, handleCardClick }) {
    console.log(clothingItems);
    return (
       <section className="clothes-section">

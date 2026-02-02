@@ -1,5 +1,5 @@
-import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
-import useForm from "../hooks/useForm.js";
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import useForm from "../../hooks/useForm.js"
 
 const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal }) => {
    const { values, handleChange } = useForm({
