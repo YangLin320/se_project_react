@@ -1,0 +1,23 @@
+.sidebar{
+    margin-left:40px;
+    margin-right: 116px;
+}
+
+.sidebar__profile {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+}
+
+.sidebar__username {
+   font-family: Cabinet Grotesk;
+   font-style: Bold;
+   font-size: 20px;
+   line-height: 100%;
+   margin:0;
+}
+
+.sidebar__avatar{
+    height: 56px;
+    width: 56px;
+}
