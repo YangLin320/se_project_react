@@ -12,7 +12,7 @@ const currentDate = new Date().toLocaleString("default", {
 function Header({ handleAddClick, weatherData }) {
    return (
       <header className="header">
-         <NavLink NavLink to="/" className="header__navlink">
+         <NavLink to="/" className="header__navlink">
             <img src={logo} alt="Image of Logo" className="header__logo" />
          </NavLink>
          <p className="header__setting">

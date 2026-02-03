@@ -1,4 +1,4 @@
-import { deleteClothing } from "../../utils/api";
+import { deleteClothing } from "../../utils/Api.js";
 import "./ItemModal.css"
 
 function ItemModal({activeModal, closeModal, card, handleDeleteItem}){

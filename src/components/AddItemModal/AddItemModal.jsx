@@ -1,5 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
-import useForm from "../../hooks/useForm.js"
+import useForm from "../../hooks/useForm.js";
 
 const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal }) => {
    const { values, handleChange } = useForm({
@@ -8,7 +8,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal }) => {
       weather: "",
    });
 
-   function handleSubmit(evt){
+   function handleSubmit(evt) {
       evt.preventDefault();
       handleAddItem(values);
    }
@@ -33,7 +33,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal }) => {
                className="modal__input"
                id="name"
                placeholder="Name"
-               name = "name"
+               name="name"
                value={values.name}
                onChange={handleChange}
             />
@@ -49,7 +49,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal }) => {
                className="modal__input"
                id="imageURL"
                placeholder="Image URL"
-               name = "imageUrl"
+               name="imageUrl"
                value={values.imageUrl}
                onChange={handleChange}
             />

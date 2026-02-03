@@ -19,6 +19,7 @@
     background-color: transparent;
     border:none;
     margin-left:20px;
+    cursor: pointer;
 }
 
 .clothes-section__cards {

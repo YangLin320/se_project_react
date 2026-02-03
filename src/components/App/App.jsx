@@ -10,7 +10,7 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
-import { deleteClothing, getClothes, postClothing } from "../../utils/api.js";
+import { deleteClothing, getClothes, postClothing } from "../../utils/Api.js";
 
 function App() {
    const [weatherData, setWeatherData] = useState({
@@ -49,18 +49,22 @@ function App() {
    const handleAddItem = (data) => {
       postClothing(data)
          .then((data) => {
-            setClothingItems([...clothingItems, data]);
+            setClothingItems([data,...clothingItems]);
             closeModal();
          })
          .catch(console.error);
    };
    const handleDeleteItem = (data) => {
-      deleteClothing(data._id).then(() => {
-         setClothingItems(clothingItems.filter((items)=>{
-            return items._id != data._id;
-         }))
-         closeModal();
-      });
+      deleteClothing(data._id)
+         .then(() => {
+            setClothingItems(
+               clothingItems.filter((items) => {
+                  return items._id != data._id;
+               }),
+            );
+            closeModal();
+         })
+         .catch(console.error);
    };
 
    useEffect(() => {
@@ -70,9 +74,11 @@ function App() {
          })
          .catch(console.error);
 
-      getClothes().then((data) => {
-         setClothingItems(data);
-      });
+      getClothes()
+         .then((data) => {
+            setClothingItems(data);
+         })
+         .catch(console.error);
    }, []);
 
    return (
@@ -102,6 +108,7 @@ function App() {
                         <Profile
                            clothingItems={clothingItems}
                            handleCardClick={handleCardClick}
+                           handleAddClick = {handleAddClick}
                         />
                      }
                   />
