@@ -26,7 +26,7 @@ function App() {
    const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
    const handleToggleSwitchChange = () => {
-      if (currentTemperatureUnit == "F") {
+      if (currentTemperatureUnit === "F") {
          setCurrentTemperatureUnit("C");
       } else {
          setCurrentTemperatureUnit("F");
@@ -46,11 +46,12 @@ function App() {
       setActiveModal("");
    };
 
-   const handleAddItem = (data) => {
+   const handleAddItem = (data, handleReset) => {
       postClothing(data)
          .then((data) => {
             setClothingItems([data,...clothingItems]);
             closeModal();
+            handleReset();
          })
          .catch(console.error);
    };
@@ -59,7 +60,7 @@ function App() {
          .then(() => {
             setClothingItems(
                clothingItems.filter((items) => {
-                  return items._id != data._id;
+                  return items._id !== data._id;
                }),
             );
             closeModal();

@@ -8,6 +8,10 @@ const useForm = (defaultValues)=>{
         setValues({...values, [name]: value});
     }
 
+    const handleReset = () => {
+       setValues(defaultValues);
+    };
+
     return {values, setValues, handleChange};
 };
 

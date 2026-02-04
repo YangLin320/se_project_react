@@ -1,4 +1,3 @@
-import { deleteClothing } from "../../utils/Api.js";
 import "./ItemModal.css"
 
 function ItemModal({activeModal, closeModal, card, handleDeleteItem}){
@@ -17,10 +16,10 @@ function ItemModal({activeModal, closeModal, card, handleDeleteItem}){
                 className="modal__img"
              />
              <div className="modal__footer">
-                <modal__card-info>
+                <div modal__card-info>
                    <p className="modal__caption">{card.name}</p>
                    <p className="modal__weather">Weather: {card.weather}</p>
-                </modal__card-info>
+                </div>
                 <button className="modal__delete" onClick={()=>{
                   handleDeleteItem(card);
                 }}> Delete Item </button>
