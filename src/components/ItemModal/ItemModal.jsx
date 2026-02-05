@@ -3,7 +3,7 @@ import "./ItemModal.css"
 function ItemModal({activeModal, closeModal, card, handleDeleteItem}){
     return (
        <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
-          <div className="modal__content modal__content_type_preview">
+          <div className="modal__content_type_preview">
              <button
                 onClick={closeModal}
                 type="button"
@@ -16,13 +16,19 @@ function ItemModal({activeModal, closeModal, card, handleDeleteItem}){
                 className="modal__img"
              />
              <div className="modal__footer">
-                <div modal__card-info>
+                <div className = "modal__card-info">
                    <p className="modal__caption">{card.name}</p>
                    <p className="modal__weather">Weather: {card.weather}</p>
                 </div>
-                <button className="modal__delete" onClick={()=>{
-                  handleDeleteItem(card);
-                }}> Delete Item </button>
+                <button
+                   className="modal__delete"
+                   onClick={() => {
+                      handleDeleteItem(card);
+                   }}
+                >
+                   {" "}
+                   Delete Item{" "}
+                </button>
              </div>
           </div>
        </div>

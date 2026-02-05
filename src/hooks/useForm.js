@@ -12,7 +12,7 @@ const useForm = (defaultValues)=>{
        setValues(defaultValues);
     };
 
-    return {values, setValues, handleChange};
+    return {values, setValues, handleChange, handleReset};
 };
 
 export default useForm;

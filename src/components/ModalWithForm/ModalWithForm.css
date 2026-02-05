@@ -43,9 +43,9 @@
 .modal__content {
    background-color: white;
    position: relative;
-   padding: 28px 28px 36px;
    width: 496px;
    border-radius: 20px;
+   padding: 28px 28px 36px;
 }
 
 .modal__field {

@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import useForm from "../../hooks/useForm.js";
 
 const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
-   const { values, handleChange } = useForm({
+   const { values, handleChange, handleReset} = useForm({
       name: "",
       imageUrl: "",
       weather: "",
@@ -68,7 +68,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
                   className="modal__radio-input"
                   id="hot"
                   onChange={handleChange}
-                  checked={values.weatherType === "hot"}
+                  checked={values.weather === "hot"}
                />
                Hot
             </label>
@@ -84,7 +84,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
                   className="modal__radio-input"
                   id="warm"
                   onChange={handleChange}
-                  checked={values.weatherType === "warm"}
+                  checked={values.weather === "warm"}
                />
                Warm
             </label>
@@ -100,7 +100,7 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
                   className="modal__radio-input"
                   id="cold"
                   onChange={handleChange}
-                  checked={values.weatherType === "cold"}
+                  checked={values.weather === "cold"}
                />
                Cold
             </label>

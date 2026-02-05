@@ -36,6 +36,9 @@
     width: 498px;
     padding:0;
     overflow:hidden;
+    background-color: white;
+   position: relative;
+   border-radius: 20px;
 }
 
 .modal__footer{
