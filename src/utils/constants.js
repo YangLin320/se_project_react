@@ -68,3 +68,5 @@ export const weatherOptions = [
 ];
 
 export const apiKey = "e361352166eedca5be0beea7a16e7c64";
+
+export const baseUrl = "http://localhost:3001";

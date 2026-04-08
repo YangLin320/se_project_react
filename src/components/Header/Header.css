@@ -36,3 +36,10 @@
 .header__navline{
     cursor: pointer;
 }
+
+.header__avatar{
+    height: 40px;
+    width: 40px;
+    border: 1px;
+    border-radius: 50%;
+}

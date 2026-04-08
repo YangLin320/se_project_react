@@ -8,9 +8,15 @@ import { getWeather, filterWeatherData } from "../../utils/weatherapi.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import Profile from "../Profile/Profile.jsx";
-import { deleteClothing, getClothes, postClothing } from "../../utils/Api.js";
+import { deleteClothing, getClothes, postClothing, likeItem, dislikeItem} from "../../utils/Api.js";
+import { register, signin, checkToken, editUser } from "../../utils/auth.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function App() {
    const [weatherData, setWeatherData] = useState({
@@ -24,6 +30,9 @@ function App() {
    const [selectedCard, setSelectedCard] = useState({});
    const [clothingItems, setClothingItems] = useState([]);
    const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+   const [currentUser, setCurrentUser] = useState({});
+   const [token, setToken] = useState(localStorage.getItem("jwt"));
 
    const handleToggleSwitchChange = () => {
       if (currentTemperatureUnit === "F") {
@@ -35,6 +44,19 @@ function App() {
 
    const handleAddClick = () => {
       setActiveModal("add-garment");
+      console.log("Added Garment Check");
+   };
+
+   const handleRegisterClick = () => {
+      setActiveModal("register");
+   };
+
+   const handleLoginClick = () => {
+      setActiveModal("login");
+   };
+
+   const handleEditProfileClick = () => {
+      setActiveModal("editProfile");
    };
 
    const handleCardClick = (card) => {
@@ -47,15 +69,16 @@ function App() {
    };
 
    const handleAddItem = (data, handleReset) => {
-      postClothing(data)
+      postClothing(data, token)
          .then((data) => {
-            setClothingItems([data,...clothingItems]);
+            setClothingItems([data, ...clothingItems]);
             closeModal();
             handleReset();
          })
          .catch(console.error);
    };
-   const handleDeleteItem = (data) => {
+
+   const handleDeleteItem = (data, token) => {
       deleteClothing(data._id)
          .then(() => {
             setClothingItems(
@@ -68,6 +91,70 @@ function App() {
          .catch(console.error);
    };
 
+   const handleCardLike = ({ item, isLiked }) => {
+      const token = localStorage.getItem("jwt");
+      !isLiked
+         ? likeItem(item._id, token)
+              .then((updatedCard) => {
+                 setClothingItems((cards) =>
+                    cards.map((card) => (card._id === currentUser._id ? updatedCard : card)),
+                 );
+              })
+              .catch((err) => console.log(err))
+         : dislikeItem(item._id, token)
+              .then((updatedCard) => {
+                 setClothingItems((cards) =>
+                    cards.map((card) =>
+                       card._id === item._id ? updatedCard : card,
+                    ),
+                 );
+              })
+              .catch((err) => console.log(err));
+      closeModal();
+   };
+
+   const handleLogin = ({ email, password }) => {
+      if (!email || !password) return;
+      signin(email, password)
+         .then((data) => {
+            if (data.token) {
+               localStorage.setItem("jwt", data.token);
+               setToken(data.token);
+               return checkToken(data.token);
+            }
+         })
+         .then((userData) => {
+            setCurrentUser(userData.user);
+            setIsLoggedIn(true);
+            closeModal();
+         })
+         .catch((err) => {
+            console.error("Login failed:", err);
+            localStorage.removeItem("jwt");
+         });
+   };
+   const handleRegistration = ({ name, avatar, email, password }) => {
+      register(name, avatar, email, password)
+         .then(() => {
+            handleLogin(email, password);
+         })
+         .catch((err) => console.error("Registration failed:", err));
+      closeModal();
+   };
+
+   const handleEditProfile = (data) => {
+      editUser(data, token).then((res) => {
+         setCurrentUser(res);
+         closeModal();
+      });
+   };
+
+   const handleLogout = () =>{
+      localStorage.removeItem("jwt");
+      setIsLoggedIn(false);
+      setCurrentUser({});
+   }
+
    useEffect(() => {
       getWeather(coordinates, apiKey)
          .then((data) => {
@@ -77,60 +164,104 @@ function App() {
 
       getClothes()
          .then((data) => {
-            setClothingItems(data);
+            setClothingItems(data.items);
          })
          .catch(console.error);
+
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+         checkToken(jwt)
+            .then((res) => {
+               setIsLoggedIn(true);
+               setCurrentUser(res.user);
+            })
+            .catch((err) => {
+               console.error("Token verification failed:", err);
+               localStorage.removeItem("jwt");
+            });
+      } else {
+         setIsLoggedIn(false);
+         setCurrentUser({});
+      }
    }, []);
 
    return (
-      <CurrentTemperatureUnitContext.Provider
-         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-         <div className="page">
-            <div className="page__content">
-               <Header
-                  handleAddClick={handleAddClick}
-                  weatherData={weatherData}
-               ></Header>
-               <Routes>
-                  <Route
-                     path="/"
-                     element={
-                        <Main
-                           weatherData={weatherData}
-                           handleCardClick={handleCardClick}
-                           clothingItems={clothingItems}
-                        ></Main>
-                     }
-                  />
-                  <Route
-                     path="/profile"
-                     element={
-                        <Profile
-                           clothingItems={clothingItems}
-                           handleCardClick={handleCardClick}
-                           handleAddClick = {handleAddClick}
-                        />
-                     }
-                  />
-               </Routes>
-               <Footer></Footer>
-            </div>
+      <CurrentUserContext.Provider value={currentUser}>
+         <CurrentTemperatureUnitContext.Provider
+            value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+         >
+            <div className="page">
+               <div className="page__content">
+                  <Header
+                     handleAddClick={handleAddClick}
+                     weatherData={weatherData}
+                     isLoggedIn={isLoggedIn}
+                     handleRegisterClick={handleRegisterClick}
+                     handleLoginClick={handleLoginClick}
+                  ></Header>
+                  <Routes>
+                     <Route
+                        path="/"
+                        element={
+                           <Main
+                              weatherData={weatherData}
+                              handleCardClick={handleCardClick}
+                              clothingItems={clothingItems}
+                              handleCardLike = {handleCardLike}
+                           ></Main>
+                        }
+                     />
+                     <Route
+                        path="/profile"
+                        element={
+                           <ProtectedRoute isLoggedIn={isLoggedIn}>
+                              <Profile
+                                 clothingItems={clothingItems}
+                                 handleCardClick={handleCardClick}
+                                 handleAddClick={handleAddClick}
+                                 handleEditProfileClick={handleEditProfileClick}
+                                 handleLogout = {handleLogout}
+                              />
+                           </ProtectedRoute>
+                        }
+                     />
+                  </Routes>
+                  <Footer></Footer>
+               </div>
 
-            <AddItemModal
-               isOpen={activeModal === "add-garment"}
-               closeModal={closeModal}
-               activeModal={activeModal}
-               handleAddItem={handleAddItem}
-            />
-            <ItemModal
-               activeModal={activeModal}
-               card={selectedCard}
-               closeModal={closeModal}
-               handleDeleteItem={handleDeleteItem}
-            />
-         </div>
-      </CurrentTemperatureUnitContext.Provider>
+               <AddItemModal
+                  closeModal={closeModal}
+                  activeModal={activeModal}
+                  handleAddItem={handleAddItem}
+               />
+
+               <RegisterModal
+                  closeModal={closeModal}
+                  activeModal={activeModal}
+                  handleRegistration={handleRegistration}
+               />
+
+               <LoginModal
+                  closeModal={closeModal}
+                  activeModal={activeModal}
+                  handleLogin={handleLogin}
+               />
+
+               <ItemModal
+                  activeModal={activeModal}
+                  card={selectedCard}
+                  closeModal={closeModal}
+                  handleDeleteItem={handleDeleteItem}
+               />
+
+               <EditProfileModal
+                  activeModal={activeModal}
+                  closeModal={closeModal}
+                  handleEditProfile={handleEditProfile}
+               ></EditProfileModal>
+            </div>
+         </CurrentTemperatureUnitContext.Provider>
+      </CurrentUserContext.Provider>
    );
 }
 

@@ -1,7 +1,7 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import useForm from "../../hooks/useForm.js";
 
-const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
+const AddItemModal = ({handleAddItem, closeModal, activeModal}) => {
    const { values, handleChange, handleReset} = useForm({
       name: "",
       imageUrl: "",
@@ -20,7 +20,6 @@ const AddItemModal = ({ isOpen, handleAddItem, closeModal, activeModal}) => {
          activeModal={activeModal}
          closeModal={closeModal}
          name={"newCard"}
-         isOpen={isOpen}
          handleSubmit={handleSubmit}
       >
          <div className="modal__field">

@@ -18,16 +18,45 @@
    height: 100%;
 }
 
-.card__title {
+.card__title-card {
+   display: flex;
    position: absolute;
    text-align: center;
    top: 15px;
+   justify-content: center;
+   align-items: center;
+   gap:10px;
+}
+.card__title {
    margin: 0;
    background-color: white;
-   padding: 0 12px;
    font-family: Cabinet Grotesk;
    font-size: 16px;
    line-height: 20px;
    border-radius: 4px;
    color: #00000099;
+   display: inline;
+}
+
+.card__like-btn {
+   height: 15px;
+   width: 18px;
+   background-color: transparent;
+   border: none;
+}
+
+.card__like-btn_active{
+   background-image: url("../../assets/liked_heart.svg");
+   background-position: center;
+   background-size: cover;
+   overflow:visible;
+   cursor: pointer;
+}
+
+.card__like-btn_default{
+   background-image: url("../../assets/default_heart.svg");
+   background-position: center;
+   background-size: cover;
+   overflow:visible;
+   cursor: pointer;
 }

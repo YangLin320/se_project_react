@@ -1,15 +1,23 @@
 import "./Header.css";
 import logo from "../../assets/Logo.svg";
-import avatar from "../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const currentDate = new Date().toLocaleString("default", {
    month: "long",
    day: "numeric",
 });
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+   handleAddClick,
+   handleRegisterClick,
+   handleLoginClick,
+   weatherData,
+   isLoggedIn,
+}) {
+   const currentUser = useContext(CurrentUserContext);
    return (
       <header className="header">
          <NavLink to="/" className="header__navlink">
@@ -24,14 +32,33 @@ function Header({ handleAddClick, weatherData }) {
             + Add Clothes
          </button>
          <div className="header__user-container">
-            <p className="header__username"> Terrence Tegegne </p>
-            <NavLink to="/profile" className="header__navlink">
-               <img
-                  src={avatar}
-                  alt="Image of User Avatar"
-                  className="header__avatar"
-               />
-            </NavLink>
+            {isLoggedIn ? (
+               <>
+                  <p className="header__username"> {currentUser.name} </p>
+                  <NavLink to="/profile" className="header__navlink">
+                     <img
+                        src={currentUser.avatar}
+                        alt="Image of User Avatar"
+                        className="header__avatar"
+                     />
+                  </NavLink>
+               </>
+            ) : (
+               <>
+                  <button
+                     onClick={handleRegisterClick}
+                     className="header__add-clothes-btn"
+                  >
+                     Sign Up
+                  </button>
+                  <button
+                     onClick={handleLoginClick}
+                     className="header__add-clothes-btn"
+                  >
+                     Log In
+                  </button>
+               </>
+            )}
          </div>
       </header>
    );

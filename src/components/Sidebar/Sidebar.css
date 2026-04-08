@@ -1,10 +1,11 @@
-.sidebar{
-    margin-left:40px;
-    margin-right: 116px;
+.sidebar {
+   margin-left: 40px;
+   margin-right: 116px;
 }
 
 .sidebar__profile {
    display: flex;
+   flex-direction: row;
    align-items: center;
    gap: 15px;
 }
@@ -14,10 +15,37 @@
    font-style: Bold;
    font-size: 20px;
    line-height: 100%;
-   margin:0;
+   margin: 0;
 }
 
-.sidebar__avatar{
-    height: 56px;
-    width: 56px;
+.sidebar__avatar {
+   height: 56px;
+   width: 56px;
+   border: 1px;
+   border-radius: 50%;
+}
+
+.sidebar__change-profile-btn {
+   display: block;
+   background-color: transparent;
+   border: none;
+   font-family: Cabinet Grotesk;
+   font-weight: 700;
+   font-size: 20px;
+   line-height: 100%;
+   padding:0;
+   margin-top: 24px;
+   cursor:pointer;
+}
+
+.sidebar__log-out-btn {
+   background-color: transparent;
+   border: none;
+   font-family: Cabinet Grotesk;
+   font-weight: 700;
+   font-size: 20px;
+   line-height: 100%;
+   padding:0;
+   margin-top:8px;
+   cursor:pointer;
 }
