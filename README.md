@@ -6,6 +6,8 @@ Developed by Yangtao Lin
 
 Project Link: https://github.com/YangLin320/se_project_react
 
+Backend Repo : https://github.com/YangLin320/se_project_express
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
