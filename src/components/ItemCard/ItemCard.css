@@ -9,7 +9,7 @@
    border: 1px solid #0000004d;
 }
 
-.card:hover {
+.card:hover{
    cursor: pointer;
 }
 
@@ -29,6 +29,7 @@
 }
 .card__title {
    margin: 0;
+   padding: 2px 12px;
    background-color: white;
    font-family: Cabinet Grotesk;
    font-size: 16px;
@@ -45,12 +46,15 @@
    border: none;
 }
 
+.card__like-btn:hover{
+   cursor: pointer;
+}
+
 .card__like-btn_active{
    background-image: url("../../assets/liked_heart.svg");
    background-position: center;
    background-size: cover;
    overflow:visible;
-   cursor: pointer;
 }
 
 .card__like-btn_default{
@@ -58,5 +62,4 @@
    background-position: center;
    background-size: cover;
    overflow:visible;
-   cursor: pointer;
 }

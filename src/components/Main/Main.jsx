@@ -3,8 +3,11 @@ import "./Main.css";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard.jsx";
-function Main({ weatherData, handleCardClick, clothingItems, handleCardLike}) {
+function Main({ weatherData, handleCardClick, clothingItems, handleCardLike, isLoggedIn}) {
    const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+   const filteredCards = clothingItems.filter((item) => {
+      return item.weather === weatherData.type;
+   });
    return (
       <main>
          <WeatherCard weatherData={weatherData} />
@@ -19,10 +22,7 @@ function Main({ weatherData, handleCardClick, clothingItems, handleCardLike}) {
             </p>
 
             <ul className="cards__list">
-               {clothingItems
-                  .filter((item) => {
-                     return item.weather === weatherData.type;
-                  })
+               {filteredCards
                   .map((item) => {
                      return (
                         <ItemCard
@@ -30,6 +30,7 @@ function Main({ weatherData, handleCardClick, clothingItems, handleCardLike}) {
                            item={item}
                            onCardClick={handleCardClick}
                            handleCardLike = {handleCardLike}
+                           isLoggedIn={isLoggedIn}
                         ></ItemCard>
                      );
                   })}

@@ -1,5 +1,6 @@
 .header{
-    margin: 32px 40px auto 40px;
+    margin: 0 40px;
+    padding-top: 32px;
     display: flex;
     align-items: center;
     flex-direction: row;

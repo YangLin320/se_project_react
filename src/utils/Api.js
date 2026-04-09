@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+import { baseUrl } from "./constants";
 
 export const checkResponse = (res) => {
    if (res.ok) {
@@ -26,8 +26,8 @@ export const postClothing = ({ name, weather, imageUrl}, token) => {
    }).then(checkResponse);
 };
 
-export const deleteClothing = (cardId, token) => {
-   return fetch(`${baseUrl}/items/${cardId}`, {
+export const deleteClothing = (itemId, token) => {
+   return fetch(`${baseUrl}/items/${itemId}`, {
       method: "DELETE",
       headers: {
          "Content-Type": "application/json",

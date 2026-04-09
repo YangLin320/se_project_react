@@ -53,8 +53,8 @@
 }
 
 .modal__img{
-   max-width: 498px;
-   max-height: 498px;
+   width: 498px;
+   height: 498px;
 }
 .modal__caption{
    margin:0;

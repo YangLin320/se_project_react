@@ -28,12 +28,16 @@ function Header({
             {currentDate}, {weatherData.city}{" "}
          </p>
          <ToggleSwitch></ToggleSwitch>
-         <button onClick={handleAddClick} className="header__add-clothes-btn">
-            + Add Clothes
-         </button>
+
          <div className="header__user-container">
             {isLoggedIn ? (
                <>
+                  <button
+                     onClick={handleAddClick}
+                     className="header__add-clothes-btn"
+                  >
+                     + Add Clothes
+                  </button>
                   <p className="header__username"> {currentUser.name} </p>
                   <NavLink to="/profile" className="header__navlink">
                      <img

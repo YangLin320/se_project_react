@@ -14,7 +14,13 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import Profile from "../Profile/Profile.jsx";
-import { deleteClothing, getClothes, postClothing, likeItem, dislikeItem} from "../../utils/Api.js";
+import {
+   deleteClothing,
+   getClothes,
+   postClothing,
+   likeItem,
+   dislikeItem,
+} from "../../utils/Api.js";
 import { register, signin, checkToken, editUser } from "../../utils/auth.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
@@ -44,7 +50,6 @@ function App() {
 
    const handleAddClick = () => {
       setActiveModal("add-garment");
-      console.log("Added Garment Check");
    };
 
    const handleRegisterClick = () => {
@@ -70,16 +75,16 @@ function App() {
 
    const handleAddItem = (data, handleReset) => {
       postClothing(data, token)
-         .then((data) => {
-            setClothingItems([data, ...clothingItems]);
+         .then((res) => {
+            setClothingItems((prevItems)=> [res.item, ...prevItems]);
             closeModal();
             handleReset();
          })
          .catch(console.error);
    };
 
-   const handleDeleteItem = (data, token) => {
-      deleteClothing(data._id)
+   const handleDeleteItem = (data) => {
+      deleteClothing(data._id, token)
          .then(() => {
             setClothingItems(
                clothingItems.filter((items) => {
@@ -91,26 +96,23 @@ function App() {
          .catch(console.error);
    };
 
-   const handleCardLike = ({ item, isLiked }) => {
-      const token = localStorage.getItem("jwt");
+   const handleCardLike = ({ id, isLiked }) => {
+      setToken(localStorage.getItem("jwt"));
       !isLiked
-         ? likeItem(item._id, token)
+         ? likeItem(id, token)
               .then((updatedCard) => {
                  setClothingItems((cards) =>
-                    cards.map((card) => (card._id === currentUser._id ? updatedCard : card)),
+                    cards.map((item) => (item._id === id ? updatedCard.data : item)),
                  );
               })
               .catch((err) => console.log(err))
-         : dislikeItem(item._id, token)
+         : dislikeItem(id, token)
               .then((updatedCard) => {
                  setClothingItems((cards) =>
-                    cards.map((card) =>
-                       card._id === item._id ? updatedCard : card,
-                    ),
+                    cards.map((item) => (item._id === id ? updatedCard.data : item)),
                  );
               })
               .catch((err) => console.log(err));
-      closeModal();
    };
 
    const handleLogin = ({ email, password }) => {
@@ -149,11 +151,11 @@ function App() {
       });
    };
 
-   const handleLogout = () =>{
+   const handleLogout = () => {
       localStorage.removeItem("jwt");
       setIsLoggedIn(false);
       setCurrentUser({});
-   }
+   };
 
    useEffect(() => {
       getWeather(coordinates, apiKey)
@@ -207,7 +209,8 @@ function App() {
                               weatherData={weatherData}
                               handleCardClick={handleCardClick}
                               clothingItems={clothingItems}
-                              handleCardLike = {handleCardLike}
+                              handleCardLike={handleCardLike}
+                              isLoggedIn={isLoggedIn}
                            ></Main>
                         }
                      />
@@ -220,7 +223,7 @@ function App() {
                                  handleCardClick={handleCardClick}
                                  handleAddClick={handleAddClick}
                                  handleEditProfileClick={handleEditProfileClick}
-                                 handleLogout = {handleLogout}
+                                 handleLogout={handleLogout}
                               />
                            </ProtectedRoute>
                         }
