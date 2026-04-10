@@ -138,10 +138,9 @@ function App() {
    const handleRegistration = ({ name, avatar, email, password }) => {
       register(name, avatar, email, password)
          .then(() => {
-            handleLogin(email, password);
+            handleLogin({email, password});
          })
          .catch((err) => console.error("Registration failed:", err));
-      closeModal();
    };
 
    const handleEditProfile = (data) => {
@@ -224,6 +223,7 @@ function App() {
                                  handleAddClick={handleAddClick}
                                  handleEditProfileClick={handleEditProfileClick}
                                  handleLogout={handleLogout}
+                                 isLoggedIn={isLoggedIn}
                               />
                            </ProtectedRoute>
                         }
