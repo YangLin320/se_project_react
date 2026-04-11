@@ -1,5 +1,4 @@
 import "./ModalWithForm.css";
-import modalClose from "../../assets/modalClose.svg";
 
 function ModalWithForm({
    children,
@@ -7,10 +6,15 @@ function ModalWithForm({
    submitTitle,
    activeModal,
    closeModal,
-   handleSubmit
+   handleSubmit,
+   isOpen,
+   orButtonText,
+   onOrButton,
 }) {
    return (
-      <div className={`modal ${(activeModal === "add-garment") && "modal_opened"}`}>
+      <div
+         className={`modal ${activeModal === activeModal && isOpen && "modal_opened"}`}
+      >
          <div className="modal__content">
             <h2 className="modal__title">{modalTitle}</h2>
             <button
@@ -20,9 +24,16 @@ function ModalWithForm({
             ></button>
             <form onSubmit={handleSubmit} className="modal__form" name="name">
                {children}
-               <button className="modal__submit" type="submit">
-                  {submitTitle}
-               </button>
+               <div className="modal__buttons">
+                  <button className="modal__submit" type="submit">
+                     {submitTitle}
+                  </button>
+                  {orButtonText && (
+                     <button className="modal__or-button" onClick={onOrButton}>
+                        {orButtonText}
+                     </button>
+                  )}
+               </div>
             </form>
          </div>
       </div>

@@ -76,7 +76,7 @@ function App() {
    const handleAddItem = (data, handleReset) => {
       postClothing(data, token)
          .then((res) => {
-            setClothingItems((prevItems)=> [res.item, ...prevItems]);
+            setClothingItems((prevItems) => [res.item, ...prevItems]);
             closeModal();
             handleReset();
          })
@@ -102,14 +102,18 @@ function App() {
          ? likeItem(id, token)
               .then((updatedCard) => {
                  setClothingItems((cards) =>
-                    cards.map((item) => (item._id === id ? updatedCard.data : item)),
+                    cards.map((item) =>
+                       item._id === id ? updatedCard.data : item,
+                    ),
                  );
               })
               .catch((err) => console.log(err))
          : dislikeItem(id, token)
               .then((updatedCard) => {
                  setClothingItems((cards) =>
-                    cards.map((item) => (item._id === id ? updatedCard.data : item)),
+                    cards.map((item) =>
+                       item._id === id ? updatedCard.data : item,
+                    ),
                  );
               })
               .catch((err) => console.log(err));
@@ -138,16 +142,18 @@ function App() {
    const handleRegistration = ({ name, avatar, email, password }) => {
       register(name, avatar, email, password)
          .then(() => {
-            handleLogin({email, password});
+            handleLogin({ email, password });
          })
          .catch((err) => console.error("Registration failed:", err));
    };
 
    const handleEditProfile = (data) => {
-      editUser(data, token).then((res) => {
-         setCurrentUser(res);
-         closeModal();
-      });
+      editUser(data, token)
+         .then((res) => {
+            setCurrentUser(res);
+            closeModal();
+         })
+         .catch(console.error);
    };
 
    const handleLogout = () => {
@@ -224,6 +230,7 @@ function App() {
                                  handleEditProfileClick={handleEditProfileClick}
                                  handleLogout={handleLogout}
                                  isLoggedIn={isLoggedIn}
+                                 handleCardLike={handleCardLike}
                               />
                            </ProtectedRoute>
                         }
@@ -242,12 +249,14 @@ function App() {
                   closeModal={closeModal}
                   activeModal={activeModal}
                   handleRegistration={handleRegistration}
+                  handleOrButton={handleLoginClick}
                />
 
                <LoginModal
                   closeModal={closeModal}
                   activeModal={activeModal}
                   handleLogin={handleLogin}
+                  handleOrButton={handleRegisterClick}
                />
 
                <ItemModal
@@ -258,6 +267,7 @@ function App() {
                />
 
                <EditProfileModal
+                  isOpen={activeModal === "editProfile"}
                   activeModal={activeModal}
                   closeModal={closeModal}
                   handleEditProfile={handleEditProfile}
