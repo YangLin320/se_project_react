@@ -108,7 +108,6 @@
 }
 
 .modal__submit {
-   margin-top: 32px;
    padding: 0;
    width: 124px;
    height: 36px;
@@ -137,4 +136,5 @@
 }
 
 .modal__buttons {
+   margin-top: 32px;
 }

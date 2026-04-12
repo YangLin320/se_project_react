@@ -12,9 +12,7 @@ function ModalWithForm({
    onOrButton,
 }) {
    return (
-      <div
-         className={`modal ${activeModal === activeModal && isOpen && "modal_opened"}`}
-      >
+      <div className={`modal ${isOpen && "modal_opened"}`}>
          <div className="modal__content">
             <h2 className="modal__title">{modalTitle}</h2>
             <button
@@ -29,7 +27,11 @@ function ModalWithForm({
                      {submitTitle}
                   </button>
                   {orButtonText && (
-                     <button className="modal__or-button" onClick={onOrButton}>
+                     <button
+                        className="modal__or-button"
+                        onClick={onOrButton}
+                        type="button"
+                     >
                         {orButtonText}
                      </button>
                   )}
