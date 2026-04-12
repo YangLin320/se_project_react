@@ -7,7 +7,7 @@ export default function ToggleSwitch() {
       CurrentTemperatureUnitContext,
    );
    return (
-      <label className="toggle-switch">
+      <label className="toggle-switch" htmlFor="toggle_checkbox">
          <input
             id="toggle_checkbox"
             onChange={handleToggleSwitchChange}

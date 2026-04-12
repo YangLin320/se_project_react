@@ -31,7 +31,10 @@ const RegisterModal = ({
          onOrButton={handleOrButton}
       >
          <div className="modal__field">
-            <label className="modal__label"> Email* </label>
+            <label className="modal__label" htmlFor="register-email">
+               {" "}
+               Email*{" "}
+            </label>
             <input
                type="email"
                className="modal__input"
@@ -44,7 +47,10 @@ const RegisterModal = ({
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Password* </label>
+            <label className="modal__label" htmlFor="register-password">
+               {" "}
+               Password*{" "}
+            </label>
             <input
                type="password"
                className="modal__input"
@@ -57,7 +63,10 @@ const RegisterModal = ({
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Name </label>
+            <label className="modal__label" htmlFor="register-name">
+               {" "}
+               Name{" "}
+            </label>
             <input
                type="text"
                className="modal__input"
@@ -70,7 +79,10 @@ const RegisterModal = ({
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Avatar URL </label>
+            <label className="modal__label" htmlFor="register-avatar">
+               {" "}
+               Avatar URL{" "}
+            </label>
             <input
                type="url"
                className="modal__input"

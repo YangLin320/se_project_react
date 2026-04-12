@@ -29,7 +29,10 @@ const LoginModal = ({
          onOrButton={handleOrButton}
       >
          <div className="modal__field">
-            <label className="modal__label"> Email </label>
+            <label className="modal__label" htmlFor="login-email">
+               {" "}
+               Email{" "}
+            </label>
             <input
                type="email"
                className="modal__input"
@@ -42,7 +45,10 @@ const LoginModal = ({
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Password </label>
+            <label className="modal__label" htmlFor="login-password">
+               {" "}
+               Password{" "}
+            </label>
             <input
                type="password"
                className="modal__input"

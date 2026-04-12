@@ -38,7 +38,10 @@ const EditProfileModal = ({
          isOpen={activeModal === "editProfile"}
       >
          <div className="modal__field">
-            <label className="modal__label"> Name </label>
+            <label className="modal__label" htmlFor="editProfile-name">
+               {" "}
+               Name{" "}
+            </label>
             <input
                type="text"
                className="modal__input"
@@ -51,7 +54,10 @@ const EditProfileModal = ({
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Avatar URL </label>
+            <label className="modal__label" htmlFor="editProfile-avatar">
+               {" "}
+               Avatar URL{" "}
+            </label>
             <input
                type="url"
                className="modal__input"

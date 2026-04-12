@@ -23,7 +23,10 @@ const AddItemModal = ({ handleAddItem, closeModal, activeModal }) => {
          isOpen={activeModal === "add-garment"}
       >
          <div className="modal__field">
-            <label className="modal__label"> Name </label>
+            <label className="modal__label" htmlFor="addItem-name">
+               {" "}
+               Name{" "}
+            </label>
             <input
                type="text"
                className="modal__input"
@@ -36,7 +39,10 @@ const AddItemModal = ({ handleAddItem, closeModal, activeModal }) => {
          </div>
 
          <div className="modal__field">
-            <label className="modal__label"> Image </label>
+            <label className="modal__label" htmlFor="addItem-imageUrl">
+               {" "}
+               Image{" "}
+            </label>
             <input
                type="url"
                className="modal__input"
